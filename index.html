@@ -3,117 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BetPay - Login</title>
+    <title>BetPay - Apuestas Deportivas y Lotería</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', 'Poppins', Roboto, sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, #0a2f1f 0%, #051f12 100%);
+            background: linear-gradient(135deg, #0a2f1f 0%, #051f12 50%, #020d08 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
-        .login-box {
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* NAVBAR */
+        .navbar {
             background: rgba(11, 30, 21, 0.95);
-            border-radius: 32px;
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #FFD966;
-            text-align: center;
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 217, 102, 0.3);
         }
-        h1 {
+
+        .logo h1 {
             color: #FFD966;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
         }
-        .demo-badge {
+
+        .logo span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.7rem;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .saldo-card {
+            background: linear-gradient(135deg, #1a3a2a, #0f281c);
+            padding: 10px 28px;
+            border-radius: 60px;
+            text-align: center;
+            border: 1px solid #FFD966;
+        }
+
+        .saldo-monto {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FFD966;
+        }
+
+        .btn-recarga {
+            background: linear-gradient(135deg, #1e7b4b, #155a38);
+            border: none;
             color: white;
-            font-size: 0.8rem;
+            padding: 12px 24px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-recarga:hover {
+            transform: scale(1.02);
+        }
+
+        /* LOGIN */
+        .login-section {
+            background: rgba(11, 30, 21, 0.9);
+            border-radius: 32px;
+            padding: 30px;
             margin-bottom: 30px;
         }
-        input {
-            width: 100%;
-            padding: 14px;
-            margin: 10px 0;
+
+        .login-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .login-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
             border-radius: 60px;
             border: none;
             background: #0d2a1f;
             color: white;
             font-size: 1rem;
         }
-        button {
-            width: 100%;
-            padding: 14px;
-            margin: 20px 0;
-            border-radius: 60px;
-            border: none;
+
+        .btn-login {
             background: linear-gradient(135deg, #FFD966, #ffc107);
-            color: #1a2a1f;
-            font-weight: bold;
-            font-size: 1rem;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 60px;
             cursor: pointer;
+            font-weight: bold;
+            color: #1a2a1f;
         }
-        .error {
-            color: #ff8888;
-            margin-top: 10px;
+
+        .btn-logout {
+            background: linear-gradient(135deg, #8b3a3a, #6c2e2e);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
         }
-        .saldo {
-            background: #1a3a2a;
-            padding: 15px;
-            border-radius: 20px;
-            margin-top: 20px;
-            color: #FFD966;
+
+        .user-info-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
         }
+
         .user-info {
             background: #1a3a2a;
-            padding: 15px;
-            border-radius: 20px;
-            margin: 10px 0;
+            padding: 12px 28px;
+            border-radius: 60px;
+            color: #FFD966;
+            font-weight: bold;
+            border: 1px solid #FFD966;
         }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(11, 30, 21, 0.8);
+            border: 1px solid rgba(255, 217, 102, 0.3);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #FFD966, #ffc107);
+            color: #1a2a1f;
+        }
+
+        /* TWO COLUMNS */
+        .two-columns {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 260px;
+            background: rgba(11, 30, 21, 0.9);
+            border-radius: 28px;
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            color: #FFD966;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 12px 14px;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255, 217, 102, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sidebar-menu li:hover {
+            background: rgba(255, 217, 102, 0.1);
+        }
+
+        .menu-count {
+            color: #FFD966;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .content {
+            flex: 3;
+            background: rgba(11, 30, 21, 0.9);
+            border-radius: 28px;
+            padding: 25px;
+        }
+
+        .content h3 {
+            color: #FFD966;
+            margin-bottom: 20px;
+        }
+
+        /* PARTIDOS */
+        .partido-card {
+            background: linear-gradient(135deg, #15281f, #0f1f18);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid rgba(255, 217, 102, 0.2);
+        }
+
+        .equipos {
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .cuotas {
+            display: flex;
+            gap: 12px;
+        }
+
+        .cuota {
+            background: linear-gradient(135deg, #1a3a2a, #0f281c);
+            padding: 10px 18px;
+            border-radius: 50px;
+            color: #FFD966;
+            cursor: pointer;
+            text-align: center;
+            min-width: 85px;
+            border: 1px solid rgba(255, 217, 102, 0.3);
+        }
+
+        .cuota:hover {
+            background: linear-gradient(135deg, #FFD966, #ffc107);
+            color: #1a2a1f;
+        }
+
+        .cuota small {
+            display: block;
+            font-size: 0.7rem;
+        }
+
+        /* LOTERIA */
+        .loteria-card {
+            background: linear-gradient(135deg, #15281f, #0f1f18);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .loteria-card h3 {
+            color: #FFD966;
+            font-size: 2rem;
+        }
+
+        .loteria-card input {
+            padding: 12px 18px;
+            border-radius: 60px;
+            border: none;
+            background: #0d2a1f;
+            color: white;
+            margin: 5px;
+            width: 150px;
+        }
+
+        /* HISTORIAL */
+        .historial {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .historial-item {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 14px 18px;
+            border-radius: 16px;
+            margin: 10px 0;
+            border-left: 4px solid #FFD966;
+        }
+
+        .footer-aviso {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(108, 143, 124, 0.8);
+            font-size: 0.7rem;
+            padding-top: 20px;
+        }
+
         .hidden {
             display: none;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 0.7rem;
-            color: #6c8f7c;
         }
     </style>
 </head>
 <body>
-    <div class="login-box" id="app">
-        <h1>⚽ BetPay</h1>
-        <div class="demo-badge">DEMO | Sin dinero real</div>
-
-        <!-- Pantalla de Login -->
-        <div id="loginPanel">
-            <input type="text" id="username" placeholder="Usuario" value="fanatico">
-            <input type="password" id="password" placeholder="Contraseña" value="123">
-            <button onclick="iniciarSesion()">Ingresar</button>
-            <div class="footer">⚠️ Solo entretenimiento - Sin dinero real</div>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1>⚽ BetPay <span>DEMO | Sin dinero real</span></h1>
+            </div>
+            <div class="header-right">
+                <div class="saldo-card">
+                    <div>💰 SALDO DEMO</div>
+                    <div class="saldo-monto" id="saldoDisplay">$0</div>
+                </div>
+                <button class="btn-recarga" id="btnRecargaGeneral">+50.000</button>
+            </div>
         </div>
 
-        <!-- Pantalla Principal (oculta al inicio) -->
-        <div id="mainPanel" class="hidden">
-            <div id="userInfo" class="user-info"></div>
-            <div class="saldo">
-                <div>💰 SALDO DEMO</div>
-                <div style="font-size: 2rem;" id="saldoDisplay">$0</div>
-                <button onclick="recargarSaldo()" style="margin-top: 10px; background: #1e7b4b;">+50.000</button>
+        <div class="login-section">
+            <div class="login-form" id="loginFormContainer">
+                <input type="text" id="loginUser" placeholder="Usuario" value="fanatico">
+                <input type="password" id="loginPass" placeholder="Contraseña" value="123">
+                <button class="btn-login" id="btnLogin">Ingresar</button>
             </div>
-            <button onclick="cerrarSesion()">Cerrar sesión</button>
+            <div id="loginUserInfo" class="hidden">
+                <div class="user-info-container">
+                    <div class="user-info" id="currentUserSpan"></div>
+                    <button class="btn-logout" id="btnLogout">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainApp" class="hidden">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="deportes">⚽ Apuestas Deportivas</button>
+                <button class="tab-btn" data-tab="loterias">🎰 Loterías</button>
+                <button class="tab-btn" data-tab="historial">📋 Mis Apuestas</button>
+            </div>
+
+            <div class="two-columns">
+                <div class="sidebar">
+                    <h3>🏆 POPULAR</h3>
+                    <ul class="sidebar-menu" id="ligasSidebar"></ul>
+                    <h3>📌 DEPORTES</h3>
+                    <ul class="sidebar-menu" id="deportesSidebar"></ul>
+                </div>
+
+                <div class="content">
+                    <div id="tabDeportes">
+                        <h3>📅 Partidos destacados</h3>
+                        <div id="partidosList"></div>
+                    </div>
+                    <div id="tabLoterias" class="hidden">
+                        <h3>🎲 Loterías BetPay</h3>
+                        <div id="loteriasContainer"></div>
+                    </div>
+                    <div id="tabHistorial" class="hidden">
+                        <h3>📜 Historial de apuestas</h3>
+                        <div id="historialLista" class="historial"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-aviso">
+            ⚠️ BETPAY DEMO - Sin dinero real - Solo entretenimiento
         </div>
     </div>
 
     <script>
-        // DATOS
+        // ========== DATOS ==========
+        const ligas = [
+            { nombre: "Premier League", count: 7963 },
+            { nombre: "La Liga", count: 8399 },
+            { nombre: "Serie A", count: 4432 },
+            { nombre: "Liga BetPlay Dimayor", count: 504 }
+        ];
+
+        const partidosPorLiga = {
+            "Premier League": [
+                { local: "Manchester City", visitante: "Arsenal", cuotaLocal: 2.10, cuotaEmpate: 3.40, cuotaVisitante: 3.20 },
+                { local: "Liverpool", visitante: "Chelsea", cuotaLocal: 1.85, cuotaEmpate: 3.60, cuotaVisitante: 4.00 }
+            ],
+            "La Liga": [
+                { local: "Real Madrid", visitante: "Barcelona", cuotaLocal: 2.20, cuotaEmpate: 3.30, cuotaVisitante: 3.10 }
+            ],
+            "Liga BetPlay Dimayor": [
+                { local: "Atlético Nacional", visitante: "Millonarios", cuotaLocal: 2.00, cuotaEmpate: 3.10, cuotaVisitante: 3.80 }
+            ]
+        };
+
+        const loterias = [
+            { id: "mega", nombre: "MEGA", premioMax: 500000000, bonoTexto: "Gana hasta 500 millones" },
+            { id: "super", nombre: "SUPER", premioMax: 50000000, bonoTexto: "Gana hasta $50 millones" },
+            { id: "extra", nombre: "EXTRA", premioMax: 1000000, bonoTexto: "Gana hasta $1 millón" }
+        ];
+
+        // ========== USUARIOS ==========
         let usuarios = [];
         let usuarioActual = null;
 
@@ -123,8 +426,7 @@
                 usuarios = JSON.parse(guardados);
             } else {
                 usuarios = [
-                    { username: 'fanatico', password: '123', saldo: 100000, historial: [] },
-                    { username: 'prueba', password: '123', saldo: 100000, historial: [] }
+                    { username: 'fanatico', password: '123', saldo: 100000, historial: [] }
                 ];
                 localStorage.setItem('betpay_usuarios', JSON.stringify(usuarios));
             }
@@ -134,45 +436,22 @@
             localStorage.setItem('betpay_usuarios', JSON.stringify(usuarios));
         }
 
-        function iniciarSesion() {
-            const user = document.getElementById('username').value.trim();
-            const pass = document.getElementById('password').value;
-            
-            let usuario = usuarios.find(u => u.username === user && u.password === pass);
-            
+        function login(username, password) {
+            let usuario = usuarios.find(u => u.username === username && u.password === password);
             if (!usuario) {
-                usuario = { username: user, password: pass, saldo: 100000, historial: [] };
+                usuario = { username, password, saldo: 100000, historial: [] };
                 usuarios.push(usuario);
                 guardarUsuarios();
             }
-            
             usuarioActual = usuario;
-            mostrarMainPanel();
+            return true;
         }
 
-        function mostrarMainPanel() {
-            document.getElementById('loginPanel').classList.add('hidden');
-            document.getElementById('mainPanel').classList.remove('hidden');
-            
-            document.getElementById('userInfo').innerHTML = `👤 ${usuarioActual.username}`;
-            document.getElementById('saldoDisplay').innerText = `$${usuarioActual.saldo.toLocaleString()}`;
-        }
-
-        function cerrarSesion() {
+        function logout() {
             usuarioActual = null;
-            document.getElementById('loginPanel').classList.remove('hidden');
-            document.getElementById('mainPanel').classList.add('hidden');
         }
 
-        function recargarSaldo() {
-            if (!usuarioActual) return;
-            usuarioActual.saldo += 50000;
-            guardarUsuarios();
-            document.getElementById('saldoDisplay').innerText = `$${usuarioActual.saldo.toLocaleString()}`;
-            alert(`💰 Recarga exitosa! Nuevo saldo: $${usuarioActual.saldo.toLocaleString()}`);
-        }
-
-        function actualizarSaldo(monto, restar) {
+        function actualizarSaldo(monto, restar = false) {
             if (!usuarioActual) return false;
             if (restar) {
                 if (usuarioActual.saldo < monto) return false;
@@ -181,11 +460,211 @@
                 usuarioActual.saldo += monto;
             }
             guardarUsuarios();
-            document.getElementById('saldoDisplay').innerText = `$${usuarioActual.saldo.toLocaleString()}`;
+            actualizarUI();
             return true;
         }
 
-        cargarUsuarios();
+        function agregarHistorial(evento, tipo, monto, resultado) {
+            if (!usuarioActual) return;
+            usuarioActual.historial.unshift({
+                fecha: new Date().toLocaleString(),
+                tipo, evento, monto, resultado
+            });
+            guardarUsuarios();
+            renderizarHistorial();
+        }
+
+        function recargarSaldo() {
+            if (!usuarioActual) { alert("Inicia sesión"); return; }
+            actualizarSaldo(50000, false);
+            alert(`💰 Nuevo saldo: $${usuarioActual.saldo.toLocaleString()}`);
+        }
+
+        function actualizarUI() {
+            const saldoDisplay = document.getElementById('saldoDisplay');
+            const userSpan = document.getElementById('currentUserSpan');
+            if (saldoDisplay && usuarioActual) saldoDisplay.innerText = "$" + usuarioActual.saldo.toLocaleString();
+            if (userSpan && usuarioActual) userSpan.innerHTML = `👤 ${usuarioActual.username} | $${usuarioActual.saldo.toLocaleString()}`;
+        }
+
+        // ========== APUESTAS ==========
+        function renderizarSidebar() {
+            const sidebar = document.getElementById('ligasSidebar');
+            if (sidebar) {
+                sidebar.innerHTML = ligas.map(l => `<li onclick="filtrarPorLiga('${l.nombre}')">${l.nombre}<span class="menu-count">${l.count}</span></li>`).join('');
+            }
+        }
+
+        function filtrarPorLiga(nombreLiga) {
+            renderizarPartidos(nombreLiga);
+        }
+
+        function renderizarPartidos(ligaFiltro = null) {
+            const container = document.getElementById('partidosList');
+            if (!container) return;
+            let html = '';
+            const ligasAMostrar = ligaFiltro ? ligas.filter(l => l.nombre === ligaFiltro) : ligas;
+            
+            for (const liga of ligasAMostrar) {
+                const partidos = partidosPorLiga[liga.nombre] || [];
+                if (partidos.length === 0) continue;
+                html += `<h3 style="color:#FFD966;">🏆 ${liga.nombre}</h3>`;
+                for (const p of partidos) {
+                    html += `<div class="partido-card">
+                        <div class="equipos">${p.local} vs ${p.visitante}</div>
+                        <div class="cuotas">
+                            <div class="cuota" onclick="hacerApuesta('${p.local}','${p.visitante}','local',${p.cuotaLocal})">${p.local}<br><small>${p.cuotaLocal}</small></div>
+                            <div class="cuota" onclick="hacerApuesta('${p.local}','${p.visitante}','empate',${p.cuotaEmpate})">Empate<br><small>${p.cuotaEmpate}</small></div>
+                            <div class="cuota" onclick="hacerApuesta('${p.local}','${p.visitante}','visitante',${p.cuotaVisitante})">${p.visitante}<br><small>${p.cuotaVisitante}</small></div>
+                        </div>
+                    </div>`;
+                }
+            }
+            container.innerHTML = html || '<p>No hay partidos</p>';
+        }
+
+        window.hacerApuesta = function(local, visitante, tipo, cuota) {
+            if (!usuarioActual) { alert("Inicia sesión"); return; }
+            let monto = parseInt(prompt("Monto a apostar:", "1000"));
+            if (isNaN(monto) || monto <= 0) { alert("Monto inválido"); return; }
+            if (monto > usuarioActual.saldo) { alert("Saldo insuficiente"); return; }
+            
+            actualizarSaldo(monto, true);
+            const random = Math.random();
+            let resultado = random < 0.4 ? "local" : (random < 0.7 ? "empate" : "visitante");
+            let ganado = (tipo === resultado);
+            let ganancia = 0;
+            
+            if (ganado) {
+                ganancia = Math.floor(monto * cuota);
+                actualizarSaldo(ganancia, false);
+                alert(`🎉 GANASTE! $${ganancia.toLocaleString()}`);
+                agregarHistorial(`${local} vs ${visitante} (${tipo})`, "⚽ Deportiva", monto, `GANÓ +$${ganancia}`);
+            } else {
+                alert(`😞 Perdiste $${monto.toLocaleString()}`);
+                agregarHistorial(`${local} vs ${visitante} (${tipo})`, "⚽ Deportiva", monto, `PERDIÓ -$${monto}`);
+            }
+            actualizarUI();
+        };
+
+        // ========== LOTERÍAS ==========
+        function renderizarLoterias() {
+            const container = document.getElementById('loteriasContainer');
+            if (!container) return;
+            let html = '';
+            loterias.forEach(l => {
+                html += `<div class="loteria-card">
+                    <h3>🎰 ${l.nombre}</h3>
+                    <p>${l.bonoTexto}</p>
+                    <input type="number" id="num_${l.id}" placeholder="Número 1-100">
+                    <input type="number" id="monto_${l.id}" placeholder="Monto">
+                    <button class="btn-login" onclick="jugarLoteria('${l.id}')">Apostar</button>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        window.jugarLoteria = function(id) {
+            if (!usuarioActual) { alert("Inicia sesión"); return; }
+            const loteria = loterias.find(l => l.id === id);
+            const numero = parseInt(document.getElementById(`num_${id}`).value);
+            const monto = parseInt(document.getElementById(`monto_${id}`).value);
+            
+            if (isNaN(numero) || numero < 1 || numero > 100) { alert("Número 1-100"); return; }
+            if (isNaN(monto) || monto <= 0) { alert("Monto inválido"); return; }
+            if (monto > usuarioActual.saldo) { alert("Saldo insuficiente"); return; }
+            
+            actualizarSaldo(monto, true);
+            const ganador = Math.floor(Math.random() * 100) + 1;
+            let ganancia = 0;
+            if (numero === ganador) {
+                ganancia = monto * (Math.random() * 20 + 5);
+                ganancia = Math.floor(ganancia);
+                actualizarSaldo(ganancia, false);
+                alert(`🎉 GANASTE! Número: ${ganador}. Premio: $${ganancia}`);
+                agregarHistorial(`${loteria.nombre} - N° ${numero}`, "🎰 Lotería", monto, `GANÓ +$${ganancia}`);
+            } else {
+                alert(`😞 Perdiste. Número ganador: ${ganador}`);
+                agregarHistorial(`${loteria.nombre} - N° ${numero}`, "🎰 Lotería", monto, `PERDIÓ -$${monto}`);
+            }
+            actualizarUI();
+        };
+
+        // ========== HISTORIAL ==========
+        function renderizarHistorial() {
+            const container = document.getElementById('historialLista');
+            if (!container) return;
+            if (!usuarioActual || !usuarioActual.historial.length) {
+                container.innerHTML = '<div class="historial-item">No hay apuestas</div>';
+                return;
+            }
+            container.innerHTML = usuarioActual.historial.map(h => `
+                <div class="historial-item">
+                    <strong>${h.fecha}</strong> | ${h.tipo} | ${h.evento} | $${h.monto} | ${h.resultado}
+                </div>
+            `).join('');
+        }
+
+        // ========== TABS ==========
+        function setupTabs() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('tabDeportes').classList.toggle('hidden', btn.dataset.tab !== 'deportes');
+                    document.getElementById('tabLoterias').classList.toggle('hidden', btn.dataset.tab !== 'loterias');
+                    document.getElementById('tabHistorial').classList.toggle('hidden', btn.dataset.tab !== 'historial');
+                    if (btn.dataset.tab === 'loterias') renderizarLoterias();
+                    if (btn.dataset.tab === 'historial') renderizarHistorial();
+                });
+            });
+        }
+
+        // ========== VISTA LOGIN ==========
+        function actualizarVistaLogin() {
+            const loginForm = document.getElementById('loginFormContainer');
+            const userInfo = document.getElementById('loginUserInfo');
+            const mainApp = document.getElementById('mainApp');
+            
+            if (usuarioActual) {
+                loginForm.classList.add('hidden');
+                userInfo.classList.remove('hidden');
+                mainApp.classList.remove('hidden');
+                actualizarUI();
+                renderizarSidebar();
+                renderizarPartidos();
+                setupTabs();
+                renderizarHistorial();
+            } else {
+                loginForm.classList.remove('hidden');
+                userInfo.classList.add('hidden');
+                mainApp.classList.add('hidden');
+            }
+        }
+
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarUsuarios();
+            
+            document.getElementById('btnLogin').addEventListener('click', () => {
+                const user = document.getElementById('loginUser').value.trim();
+                const pass = document.getElementById('loginPass').value;
+                if (!user) { alert("Ingresa usuario"); return; }
+                login(user, pass);
+                actualizarVistaLogin();
+            });
+            
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                logout();
+                actualizarVistaLogin();
+            });
+            
+            document.getElementById('btnRecargaGeneral').addEventListener('click', () => {
+                recargarSaldo();
+            });
+            
+            actualizarVistaLogin();
+        });
     </script>
 </body>
 </html>
